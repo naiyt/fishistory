@@ -9,5 +9,8 @@ Gem::Specification.new do |gem|
   gem.email          =  'nate@natecollings.com'
   gem.homepage       =  'https://github.com/naiyt/fishistory'
   gem.license        =  'MIT'
+
+  gem.required_ruby_version = '>= 2.1.5'
+  gem.add_dependency 'activerecord', '>= 4.0.0'
 end
 
