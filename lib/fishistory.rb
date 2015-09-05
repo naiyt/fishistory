@@ -1,4 +1,6 @@
 require 'fishistory/config'
+require 'fishistory/exceptions'
+require 'fishistory/install'
 
 module Fishistory
   def self.configure
