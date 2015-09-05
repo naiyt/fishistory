@@ -1,0 +1,5 @@
+host: 'localhost'
+adapter: 'sqlite3'
+database: './fishistory.db'
+encoding: 'utf8'
+

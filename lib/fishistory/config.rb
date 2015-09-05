@@ -8,7 +8,7 @@ module Fishistory
       @database = 'fishistory'
       @username = 'root'
       @password = 'password'
-    end 
+    end
   end
 end
 

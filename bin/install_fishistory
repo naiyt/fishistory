@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-require "fishistory"
-
-config = Fishistory.config
-installer = Fishistory::Installer.new(config)
-installer.run
-
