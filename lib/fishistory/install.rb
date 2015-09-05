@@ -22,7 +22,7 @@ module Fishistory
     #
 
     def create_dir!(dir, mode = 0755)
-      FileUtils.mkdir(dir, mode: mode)
+      FileUtils.mkdir(dir, mode: mode) unless File.directory?(dir)
     end
 
     def copy_fishistory_func!(src, dest)
