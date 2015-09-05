@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.license        =  'MIT'
 
   gem.files         = `git ls-files`.split($/)
-  gem.executables   = ['install']
+  gem.executables   = ['install_fishistory']
   gem.test_files    = gem.files.grep(%r{^(test|spec)/})
   gem.require_paths = ["lib"]
 
