@@ -3,6 +3,6 @@
 require "fishistory"
 
 config = Fishistory.config
-installer = Fishistory::Install.new(config)
+installer = Fishistory::Installer.new(config)
 installer.run
 
