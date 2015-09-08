@@ -74,5 +74,36 @@ describe Fishistory do
       end
     end
   end
+
+  describe "Parser" do
+    describe "#parse!" do
+      let(:subject) { Fishistory::Parser.new }
+
+      before do
+      end
+
+      it "ensures the parsed dir exists, and creates it if necessary" do
+        skip
+      end
+
+      it "parses the command files into hashes" do
+        parsed = subject.parse!(archive_old: false)
+        puts parsed
+        skip
+      end
+
+      context "archive_old is false" do
+        it "leaves the command files in place" do
+          skip
+        end
+      end
+
+      context "archive_old is true" do
+        it "moves the command files to the parsed dir" do
+          skip
+        end
+      end
+    end
+  end
 end
 

@@ -31,3 +31,15 @@ task :install do
   end
 end
 
+namespace :commands do
+  task :save do
+    archive_old = false
+    puts "Parsing existing command files..."
+    parser = Fishistory::Parser.new
+    commands = parser.parse!(archive_old=archive_old)
+    puts "Old command files moved to ~/.config/fish/fishistory/parsed" if archive_old
+    puts "Commands: "
+    puts commands
+  end
+end
+
