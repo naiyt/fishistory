@@ -6,12 +6,12 @@ module Fishistory
   class Command < ActiveRecord::Base
     scope :success,                lambda { where(rc: 0) }
     scope :not_success,            lambda { where("rc IS NOT 0") }
-    scope :by_frequency,           lambda { select("*, command, count(command) as freq")
-                                            .order(freq: :desc)
+    scope :by_frequency,           lambda { select("*, count(command) as freq")
+                                            .order("freq desc")
                                             .group(:command) }
 
     scope :by_full_cmd_frequency,  lambda { select("*, count(full_command) as freq")
-                                            .order(freq: :desc)
+                                            .order("freq desc")
                                             .group(:full_command) }
 
     scope :by_hostname,   lambda { |host| where(host: host) }
