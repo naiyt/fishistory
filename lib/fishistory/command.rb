@@ -1,5 +1,21 @@
 module Fishistory
   class Command < ActiveRecord::Base
+    scope :success,       lambda { where(rc: 0) }
+    scope :not_success,   lambda { where("rc IS NOT 0") }
+    scope :by_frequency,  lambda { select("command, count(command) as freq").order("freq desc").group("command") }
+    scope :by_hostname,   lambda { |host| where(host: host) }
+
+    def self.by_running_time
+      Command.all.sort_by(&:running_time)
+    end
+
+    def self.most_frequent(count=20)
+      by_frequency.limit(count)
+    end
+
+    def running_time
+      end_timestamp - start_timestamp
+    end
   end
 
   class CommandsController
