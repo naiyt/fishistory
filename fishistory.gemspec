@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.1.5'
   gem.add_dependency 'activerecord', '>= 4.0.0'
   gem.add_dependency 'sqlite3'
+  gem.add_dependency 'whenever'
 
   gem.add_development_dependency 'rspec', '>= 3.0.0'
   gem.add_development_dependency 'pry'
