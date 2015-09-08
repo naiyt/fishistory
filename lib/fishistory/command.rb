@@ -1,8 +1,15 @@
 module Fishistory
   class Command < ActiveRecord::Base
-    scope :success,       lambda { where(rc: 0) }
-    scope :not_success,   lambda { where("rc IS NOT 0") }
-    scope :by_frequency,  lambda { select("command, count(command) as freq").order("freq desc").group("command") }
+    scope :success,                lambda { where(rc: 0) }
+    scope :not_success,            lambda { where("rc IS NOT 0") }
+    scope :by_frequency,           lambda { select("*, command, count(command) as freq")
+                                            .order(freq: :desc)
+                                            .group(:command) }
+
+    scope :by_full_cmd_frequency,  lambda { select("*, count(full_command) as freq")
+                                            .order(freq: :desc)
+                                            .group(:full_command) }
+
     scope :by_hostname,   lambda { |host| where(host: host) }
 
     def self.by_running_time
@@ -32,14 +39,19 @@ module Fishistory
 
     def create_cmd!(cmd_hash)
       command = Command.new
-      full_cmd = cmd_hash["cmd"].to_s.split("\s")
-      command.command = full_cmd[0]
-      command.args = full_cmd.length == 1 ? nil : full_cmd[1..-1].join(" ")
-      command.start_timestamp = cmd_hash["start"]
-      command.end_timestamp = cmd_hash["end"]
+      split_command = cmd_hash["cmd"].to_s.split("\s")
+      command.full_command = cmd_hash["cmd"]
+      command.command = split_command[0]
+      command.args = split_command.length == 1 ? nil : split_command[1..-1].join(" ")
+      command.start_timestamp = to_time(cmd_hash["start"])
+      command.end_timestamp = to_time(cmd_hash["end"])
       command.rc = cmd_hash["rc"]
       command.host = cmd_hash["host"]
       command.save!
+    end
+
+    def to_time(timestamp)
+      Time.at(timestamp.to_i)
     end
 
     def console

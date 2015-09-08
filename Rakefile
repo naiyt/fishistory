@@ -23,8 +23,9 @@ namespace :fishistory do
         create_table :commands do |t|
           t.string :command
           t.string :args
-          t.integer :start_timestamp
-          t.integer :end_timestamp
+          t.string :full_command
+          t.datetime :start_timestamp
+          t.datetime :end_timestamp
           t.integer :rc
           t.string :host
         end
