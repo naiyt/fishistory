@@ -1,10 +1,13 @@
 require "fileutils"
 require "yaml"
 
+# TODO: add specs
+
 module Fishistory
   class Parser
     attr_accessor :commands
 
+    # TODO: this should get initialized by a config object
     def initialize(history_path="~/.config/fish/fishistory")
       @history_path = File.expand_path(history_path)
       @parsed_path = File.join(@history_path, 'parsed')
@@ -31,6 +34,7 @@ module Fishistory
       @files ||= Dir["#{@history_path}/*.txt"]
     end
 
+    # TODO: this should probably tar them up or something
     def mv_to_parsed(file_path)
       FileUtils.mv(file_path, @parsed_path)
     end

@@ -1,9 +1,20 @@
+# This is the fish function that will actually keep track of your commands
+
+# Utilizes the preexec and postexec hooks added here: https://github.com/fish-shell/fish-shell/pull/1666
+
 function fishistory
-  function preexec_test --on-event fish_preexec
+
+  # TODO: This could cause problems with accurately tracking time when you have multiple
+  # terminals. Not sure though, needs to be tested.
+
+  # This runs before a command is run; stores a global start time variable.
+  function pre_command --on-event fish_preexec
     set -gx start_time (timestamp)
   end
 
-  function postexec_test --on-event fish_postexec
+  # This runs after a command is run, and writes the command data
+  # to the current fishistory file.
+  function post_command --on-event fish_postexec
     set -x rc $status
     set -x end_time (timestamp)
     set -x hostname (hostname)

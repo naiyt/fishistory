@@ -1,5 +1,8 @@
 require "fileutils"
 
+# TODO: add an uninstaller
+# TODO: print info
+
 module Fishistory
   class Installer
     def initialize(config)
@@ -64,6 +67,7 @@ module Fishistory
     #
 
     def fish_installed?
+      # TODO: verify they have 2.2.0 (required for post/pre-exec events)
       which 'fish'
     end
 

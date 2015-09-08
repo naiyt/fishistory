@@ -87,8 +87,6 @@ describe Fishistory do
       end
 
       it "parses the command files into hashes" do
-        parsed = subject.parse!(archive_old: false)
-        puts parsed
         skip
       end
 

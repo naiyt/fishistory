@@ -1,4 +1,8 @@
 module Fishistory
+  # TODO: Add more cool scopes
+  # TODO: Spec this
+  # TODO: Add a way to "recommend" aliases
+
   class Command < ActiveRecord::Base
     scope :success,                lambda { where(rc: 0) }
     scope :not_success,            lambda { where("rc IS NOT 0") }
@@ -37,6 +41,7 @@ module Fishistory
       commands.each { |cmd_hash| create_cmd!(cmd_hash)  }
     end
 
+    # TODO: make sure this all gets sanitized properly
     def create_cmd!(cmd_hash)
       command = Command.new
       split_command = cmd_hash["cmd"].to_s.split("\s")
@@ -47,13 +52,14 @@ module Fishistory
       command.end_timestamp = to_time(cmd_hash["end"])
       command.rc = cmd_hash["rc"]
       command.host = cmd_hash["host"]
-      command.save!
+      command.save
     end
 
     def to_time(timestamp)
       Time.at(timestamp.to_i)
     end
 
+    # TODO: is it the best choice to use pry here?
     def console
       Command.connection
       binding.pry

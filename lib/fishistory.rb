@@ -1,3 +1,4 @@
+require 'active_record'
 require 'fishistory/config'
 require 'fishistory/exceptions'
 require 'fishistory/install'
