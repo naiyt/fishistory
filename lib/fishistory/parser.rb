@@ -11,7 +11,6 @@ module Fishistory
     end
 
     def parse!(archive_old=true)
-      puts archive_old
       ensure_parsed_dir!
       parsed = parse_files(files)
       files.each { |f| mv_to_parsed(f) } if archive_old
