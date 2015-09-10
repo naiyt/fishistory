@@ -27,7 +27,12 @@ module Fishistory
     end
 
     def parse_files(to_parse)
-      to_parse.map { |f| YAML::load_file(f) }.flatten
+      to_parse.map do |f|
+        begin
+          YAML::load_file(f)
+        rescue Psych::SyntaxError
+        end
+      end.flatten
     end
 
     def files
